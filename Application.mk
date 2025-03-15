@@ -69,7 +69,7 @@ STATIC_BUILD     := true
 BUILD_MAGICK_BIN := true
 BUILD_MAGICKWAND := true
 # requires magickwand
-BUILD_MAGICKPP   := false
+BUILD_MAGICKPP   := true
 
 
 #------------------------------------------
@@ -78,7 +78,7 @@ BUILD_MAGICKPP   := false
 
 # openCL build requires special setup. Check the libopencl
 # directory for more information
-OPENCL_BUILD     := false
+OPENCL_BUILD     := true
 OPENMP_BUILD     := true
 
 
