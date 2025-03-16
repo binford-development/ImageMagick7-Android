@@ -496,7 +496,9 @@
 #endif
 
 /* Define to 1 if you have the <OpenCL/cl.h> header file. */
-/* #undef HAVE_OPENCL_CL_H */
+#ifndef HAVE_OPENCL_CL_H 
+#define HAVE_OPENCL_CL_H 1
+#endif
 
 /* Define to 1 if you have the <OS.h> header file. */
 /* #undef HAVE_OS_H */
@@ -1482,7 +1484,9 @@
 #endif
 
 /* Build self-contained, embeddable, zero-configuration ImageMagick */
-/* #undef ZERO_CONFIGURATION_SUPPORT */
+#ifndef ZERO_CONFIGURATION_SUPPORT
+#define ZERO_CONFIGURATION_SUPPORT 1
+#endif
 
 /* Define if you have ZLIB library */
 /* #undef MAGICKCORE_ZLIB_DELEGATE */
@@ -1492,7 +1496,7 @@
 
 /* Enable large inode numbers on Mac OS X 10.5.  */
 #ifndef _DARWIN_USE_64_BIT_INODE
-# define _DARWIN_USE_64_BIT_INODE 1
+#define _DARWIN_USE_64_BIT_INODE 1
 #endif
 
 /* Number of bits in a file offset, on hosts where this is settable. */
@@ -1511,7 +1515,9 @@
 /* #undef _MINIX */
 
 /* Define this for the OpenCL Accelerator */
-/* #undef _OPENCL */
+#ifndef _OPENCL
+#define _OPENCL 1
+#endif
 
 /* Define to 2 if the system does not provide POSIX.1 features except with
    this defined. */
