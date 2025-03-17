@@ -53,7 +53,7 @@ APP_CPPFLAGS += -O3
 
 HDRI_ENABLE   := true
 # 8, 16, 32
-QUANTUM_DEPTH := 16
+QUANTUM_DEPTH := 32
 
 
 #------------------------------------------
