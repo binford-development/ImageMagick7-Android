@@ -1244,7 +1244,7 @@
 
 /* Number of bits in a pixel Quantum (8/16/32/64) */
 #ifndef MAGICKCORE_QUANTUM_DEPTH_OBSOLETE_IN_H
-#define MAGICKCORE_QUANTUM_DEPTH_OBSOLETE_IN_H 16
+#define MAGICKCORE_QUANTUM_DEPTH_OBSOLETE_IN_H 32
 #endif
 
 /* Define if you have RAQM library */
