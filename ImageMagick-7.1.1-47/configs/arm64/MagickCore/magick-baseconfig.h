@@ -165,7 +165,9 @@
 #endif
 
 /* Define to 1 if you have the <CL/cl.h> header file. */
-/* #undef HAVE_CL_CL_H */
+#ifndef HAVE_CL_CL_H
+#define HAVE_CL_CL_H 1
+#endif
 
 /* Define to 1 if you have the <complex.h> header file. */
 #ifndef MAGICKCORE_HAVE_COMPLEX_H
@@ -496,7 +498,9 @@
 #endif
 
 /* Define to 1 if you have the <OpenCL/cl.h> header file. */
-/* #undef HAVE_OPENCL_CL_H */
+#ifndef HAVE_OPENCL_CL_H 
+#define HAVE_OPENCL_CL_H 1
+#endif
 
 /* Define to 1 if you have the <OS.h> header file. */
 /* #undef HAVE_OS_H */
@@ -1153,7 +1157,7 @@
 
 /* Target Host CPU */
 #ifndef MAGICKCORE_MAGICK_TARGET_CPU
-#define MAGICKCORE_MAGICK_TARGET_CPU x86
+#define MAGICKCORE_MAGICK_TARGET_CPU aarch64
 #endif
 
 /* Target Host OS */
@@ -1203,7 +1207,7 @@
 
 /* Define to the full name and version of this package. */
 #ifndef MAGICKCORE_PACKAGE_STRING
-#define MAGICKCORE_PACKAGE_STRING "ImageMagick 7.1.1-45"
+#define MAGICKCORE_PACKAGE_STRING "ImageMagick 7.1.1-47"
 #endif
 
 /* Define to the one symbol short name of this package. */
@@ -1218,7 +1222,7 @@
 
 /* Define to the version of this package. */
 #ifndef MAGICKCORE_PACKAGE_VERSION
-#define MAGICKCORE_PACKAGE_VERSION "7.1.1-45"
+#define MAGICKCORE_PACKAGE_VERSION "7.1.1-47"
 #endif
 
 /* Define if you have PANGOCAIRO library */
@@ -1242,7 +1246,7 @@
 
 /* Number of bits in a pixel Quantum (8/16/32/64) */
 #ifndef MAGICKCORE_QUANTUM_DEPTH_OBSOLETE_IN_H
-#define MAGICKCORE_QUANTUM_DEPTH_OBSOLETE_IN_H 16
+#define MAGICKCORE_QUANTUM_DEPTH_OBSOLETE_IN_H 32
 #endif
 
 /* Define if you have RAQM library */
@@ -1435,7 +1439,7 @@
 
 /* Version number of package */
 #ifndef MAGICKCORE_VERSION
-#define MAGICKCORE_VERSION "7.1.1-45"
+#define MAGICKCORE_VERSION "7.1.1-47"
 #endif
 
 /* Define if you have WEBPMUX library */
@@ -1482,7 +1486,9 @@
 #endif
 
 /* Build self-contained, embeddable, zero-configuration ImageMagick */
-/* #undef ZERO_CONFIGURATION_SUPPORT */
+#ifndef ZERO_CONFIGURATION_SUPPORT
+#define ZERO_CONFIGURATION_SUPPORT 1
+#endif
 
 /* Define if you have ZLIB library */
 /* #undef MAGICKCORE_ZLIB_DELEGATE */
@@ -1511,7 +1517,9 @@
 /* #undef _MINIX */
 
 /* Define this for the OpenCL Accelerator */
-/* #undef _OPENCL */
+#ifndef _OPENCL
+#define _OPENCL 1
+#endif
 
 /* Define to 2 if the system does not provide POSIX.1 features except with
    this defined. */
