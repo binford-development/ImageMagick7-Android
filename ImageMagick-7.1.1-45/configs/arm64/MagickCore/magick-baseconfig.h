@@ -165,7 +165,9 @@
 #endif
 
 /* Define to 1 if you have the <CL/cl.h> header file. */
-/* #undef HAVE_CL_CL_H */
+#ifndef HAVE_CL_CL_H
+#define HAVE_CL_CL_H 1
+#endif
 
 /* Define to 1 if you have the <complex.h> header file. */
 #ifndef MAGICKCORE_HAVE_COMPLEX_H
