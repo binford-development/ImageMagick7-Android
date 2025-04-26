@@ -120,9 +120,7 @@ jobs:
         with:
           name: Android ImageMagick ${{ env.TAG }}
           body: |
-            Library built using default config.
-
-            If you need a different config than default, please follow compilation instructions on the main page to manually build it (or, fork the project, change the config file, and use GitHub Actions to build it).
+            "Releases are built with OpenCL support and contain both static and shared versions of the Image Magick binary and libraries."  
           token: ${{ secrets.GITHUB_TOKEN }}
           commit: ${{ github.sha }}
           tag: ${{ env.TAG }}
