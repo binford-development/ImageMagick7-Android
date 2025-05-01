@@ -86,7 +86,7 @@ jobs:
           New-Item -ItemType Directory -Path all_libs/shared -Force
           Move-Item -Path static_libs/*/* -Destination all_libs/static/ -Force -ErrorAction SilentlyContinue
           Move-Item -Path shared_libs/*/* -Destination all_libs/shared/ -Force -ErrorAction SilentlyContinue
-          Compress-Archive -CompressionLevel Optimal -Path all_libs/* -DestinationPath "imagemagick-7-android-${{ env.VERSION }}-hdri-q16.zip"
+          Compress-Archive -CompressionLevel Optimal -Path all_libs/* -DestinationPath "imagemagick-android-${{ env.VERSION }}-hdri-q16.zip"
 
       - name: Get Latest Release Tag
         if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
@@ -159,7 +159,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: 'imagemagick-7-android-${{ env.VERSION }}-hdri-q16.zip'
+          file: 'imagemagick-android-${{ env.VERSION }}-hdri-q16.zip'
           release_id: ${{ steps.latest_release.outputs.id }}
           overwrite: true
           draft: false
