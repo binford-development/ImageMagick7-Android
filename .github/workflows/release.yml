@@ -55,12 +55,21 @@ jobs:
           # Write the modified content back to the file
           $content | Set-Content $file
 
-      - name: Extract Version from Git Tag
+      - name: Extract Version from Directory Name
         id: get_version
         run: |
-          $tag = git describe --tags --abbrev=0
-          Write-Host "Found Git Tag: $tag"
-          $version = $tag -replace "^v", ""  # Remove "v" prefix if exists
+          # Find the directory starting with "ImageMagick-"
+          $directories = Get-ChildItem -Directory -Name | Where-Object { $_ -like "ImageMagick-*" }
+          if ($directories.Count -eq 0) {
+              Write-Error "No directory matching 'ImageMagick-*' found."
+          }
+          # Extract the version using a regular expression
+          $directoryName = $directories[0]
+          if ($directoryName -match "^ImageMagick-(.+)$") {
+              $version = $matches[1]  # Capture group from regex
+          } else {
+              Write-Error "Failed to extract version from directory name: $directoryName"
+          }
           Write-Host "Extracted Version: $version"
           echo "VERSION=$version" >> $env:GITHUB_ENV
         shell: pwsh
