@@ -58,8 +58,15 @@ jobs:
       - name: Extract Version from Directory Name
         id: get_version
         run: |
-          VERSION=$(ls -d ImageMagick-* | head -n 1 | cut -d'-' -f2-)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          # Find the directory starting with "ImageMagick-"
+          $directories = Get-ChildItem -Directory -Name | Where-Object { $_ -like "ImageMagick-*" }
+          if ($directories.Count -eq 0) {
+              Write-Error "No directory matching 'ImageMagick-*' found."
+          }
+          $version = $directories[0] -replace "^ImageMagick-", ""
+          Write-Host "Extracted Version: $version"
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+        shell: pwsh
 
       - name: Build and Archive Static Library
         run: |
