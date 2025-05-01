@@ -58,15 +58,20 @@ jobs:
       - name: Extract Version from Directory Name
         id: get_version
         run: |
-          # Find the directory starting with "ImageMagick-"
-          $directories = Get-ChildItem -Directory -Name | Where-Object { $_ -like "ImageMagick-*" }
+          # Navigate to the root directory
+          $rootPath = "$(Get-Location)"
+          Write-Host "Root directory: $rootPath"
+          
+          # Find the directory starting with "ImageMagick-" in the root directory
+          $directories = Get-ChildItem -Path $rootPath -Directory -Name | Where-Object { $_ -like "ImageMagick-*" }
           if ($directories.Count -eq 0) {
-              Write-Error "No directory matching 'ImageMagick-*' found."
+              Write-Error "No directory matching 'ImageMagick-*' found in the root directory."
           }
-          # Extract the version using a regular expression
+          
+          # Extract the version using a more robust regex
           $directoryName = $directories[0]
-          if ($directoryName -match "^ImageMagick-(.+)$") {
-              $version = $matches[1]  # Capture group from regex
+          if ($directoryName -match "^ImageMagick-(.*)$") {
+              $version = $matches[1]  # Capture everything after "ImageMagick-"
           } else {
               Write-Error "Failed to extract version from directory name: $directoryName"
           }
