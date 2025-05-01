@@ -55,6 +55,12 @@ jobs:
           # Write the modified content back to the file
           $content | Set-Content $file
 
+      - name: Extract Version from Directory Name
+        id: get_version
+        run: |
+          VERSION=$(ls -d ImageMagick-* | head -n 1 | cut -d'-' -f2-)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
       - name: Build and Archive Static Library
         run: |
           ./build-release
@@ -73,7 +79,7 @@ jobs:
           New-Item -ItemType Directory -Path all_libs/shared -Force
           Move-Item -Path static_libs/*/* -Destination all_libs/static/ -Force -ErrorAction SilentlyContinue
           Move-Item -Path shared_libs/*/* -Destination all_libs/shared/ -Force -ErrorAction SilentlyContinue
-          Compress-Archive -CompressionLevel Optimal -Path all_libs/* -DestinationPath "imagemagick-7-android-${{ matrix.abi }}.zip"
+          Compress-Archive -CompressionLevel Optimal -Path all_libs/* -DestinationPath "imagemagick-android-${{ env.VERSION }}-hdri-q32.zip"
 
       - name: Get Latest Release Tag
         if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
@@ -148,7 +154,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: 'imagemagick-7-android-${{ matrix.abi }}.zip'
+          file: 'imagemagick-android-${{ env.VERSION }}-hdri-q32.zip'
           release_id: ${{ steps.latest_release.outputs.id }}
           overwrite: true
           draft: false
