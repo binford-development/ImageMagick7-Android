@@ -132,7 +132,12 @@ jobs:
         with:
           name: Android ImageMagick ${{ env.TAG }}
           body: |
-            "Releases are built with OpenCL support and contain both static and shared versions of the Image Magick binary and libraries."  
+            ImageMagick for Android is built for arm64-v8a devices and, by default, is released with a quantum depth of 16. An experimental variant with quantum depth set to 32 is also available. Included in both variants are static and shared versions of the ImageMagick binary and libraries. Each is built with the following features: 
+                - HDRI
+                - OpenMP
+                - OpenCL
+                - MagickWand
+                - Magick++
           token: ${{ secrets.GITHUB_TOKEN }}
           commit: ${{ github.sha }}
           tag: ${{ env.TAG }}
