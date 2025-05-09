@@ -88,7 +88,6 @@ jobs:
           Write-Host "Extracted Version: $version"
           echo "VERSION=$version" >> $env:GITHUB_ENV
         shell: pwsh
-
         
       - name: Build and Archive Static Library
         run: |
