@@ -55,15 +55,36 @@ jobs:
           # Write the modified content back to the file
           $content | Set-Content $file
 
-      - name: Extract Version from Directory Name
+      - name: Extract Version from README.md
         id: get_version
         run: |
-          # Find the directory starting with "ImageMagick-"
-          $directories = Get-ChildItem -Directory -Name | Where-Object { $_ -like "ImageMagick-*" }
-          if ($directories.Count -eq 0) {
-              Write-Error "No directory matching 'ImageMagick-*' found."
+          # Navigate to the root directory
+          $rootPath = "$(Get-Location)"
+          Write-Host "Root directory: $rootPath"
+
+          # Define the path to the README.md file
+          $readmeFile = Join-Path $rootPath "README.md"
+
+          # Check if README.md exists
+          if (-Not (Test-Path $readmeFile)) {
+              Write-Error "README.md file not found in the root directory."
           }
-          $version = $directories[0] -replace "^ImageMagick-", ""
+
+          # Read the first header from the README.md file
+          $content = Get-Content $readmeFile
+          $header = $content | Where-Object { $_ -match "^#\s+Android\s+ImageMagick\s+(\d+\.\d+\.\d+-\d+)" } | Select-Object -First 1
+
+          if (-Not $header) {
+              Write-Error "Failed to extract version number from README.md."
+          }
+
+          # Extract the version number from the header
+          if ($header -match "^#\s+Android\s+ImageMagick\s+(\d+\.\d+\.\d+-\d+)") {
+              $version = $matches[1]
+          } else {
+              Write-Error "Version number not found in the first header."
+          }
+
           Write-Host "Extracted Version: $version"
           echo "VERSION=$version" >> $env:GITHUB_ENV
         shell: pwsh
