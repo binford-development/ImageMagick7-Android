@@ -58,35 +58,13 @@ jobs:
       - name: Extract Version from README.md
         id: get_version
         run: |
-          # Navigate to the root directory
-          $rootPath = "$(Get-Location)"
-          Write-Host "Root directory: $rootPath"
-
-          # Define the path to the README.md file
-          $readmeFile = Join-Path $rootPath "README.md"
-
-          # Check if README.md exists
-          if (-Not (Test-Path $readmeFile)) {
-              Write-Error "README.md file not found in the root directory."
-          }
-
-          # Read the first header from the README.md file
-          $content = Get-Content $readmeFile
+          $content = Get-Content "README.md"
           $header = $content | Where-Object { $_ -match "^#\s+Android\s+ImageMagick\s+(\d+\.\d+\.\d+-\d+)" } | Select-Object -First 1
-
-          if (-Not $header) {
-              Write-Error "Failed to extract version number from README.md."
-          }
-
-          # Extract the version number from the header
           if ($header -match "^#\s+Android\s+ImageMagick\s+(\d+\.\d+\.\d+-\d+)") {
-              $version = $matches[1]
+              echo "VERSION=$($matches[1])" >> $env:GITHUB_ENV
           } else {
-              Write-Error "Version number not found in the first header."
+              throw "Version number not found."
           }
-
-          Write-Host "Extracted Version: $version"
-          echo "VERSION=$version" >> $env:GITHUB_ENV
         shell: pwsh
         
       - name: Build and Archive Static Library
