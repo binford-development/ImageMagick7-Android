@@ -15,7 +15,7 @@ on:
   pull_request:
     types: [opened]
   schedule:
-    - cron: '33 20 * * 3'
+    - cron: '0 2 * * 0'
 
 jobs:
   analyze:
@@ -27,7 +27,7 @@ jobs:
       security-events: write
 
     # right side implies it's a pull request. Run on all excpept pull requests imupdate branch
-    if: github.event_name != 'pull_request' || github.head_ref != 'imupdate' && (github.actor == 'blackhat2233' || github.actor == 'molotovcherry')
+    if: github.event_name != 'pull_request' || github.head_ref != 'imupdate' && (github.actor == 'binford-development')
 
     strategy:
       fail-fast: false
