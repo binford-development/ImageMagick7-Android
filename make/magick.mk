@@ -35,7 +35,7 @@ endif
 # compiling with openCL support
 ifeq ($(OPENCL_BUILD),true)
     # bunch of undefined errors without this..
-    LOCAL_LDLIBS += -fuse-ld=gold
+    LOCAL_LDLIBS += -fuse-ld=lld
 endif
 
 ifeq ($(BUILD_MAGICK_BIN),true)
