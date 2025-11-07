@@ -2,6 +2,9 @@
 
 name: ImageMagick Updater Bot
 
+on: 
+  workflow_dispatch: {}
+
 jobs:
   createPullRequest:
     name: Update ImageMagick with Pull Request
