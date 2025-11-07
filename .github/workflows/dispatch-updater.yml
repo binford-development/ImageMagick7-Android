@@ -1,0 +1,21 @@
+name: Dispatch IM Updater to branch
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch im-updater-bot.yml on target branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_BRANCH: Imagemagick7-Android-QuantumDepth32
+        run: |
+          echo "Dispatching im-updater-bot.yml on branch $TARGET_BRANCH"
+          curl -s -X POST \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/im-updater-bot.yml/dispatches" \
+            -d "{\"ref\":\"$TARGET_BRANCH\"}"
